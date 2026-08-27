@@ -46,11 +46,11 @@ document.addEventListener("DOMContentLoaded", () => {
     sheet16: { next: "sheet17", delay: 17000 },
 
     /* Existing visual sheets */
-    sheet17: { next: "sheet18", delay: 9000 },
-    sheet18: { next: "sheet19", delay: 9000 },
-    sheet19: { next: "sheet20", delay: 9000 },
-    sheet20: { next: "sheet21", delay: 10000 },
-    sheet21: { next: "sheet22", delay: 10000 },
+    sheet17: { next: "sheet18", delay: 8000 },
+    sheet18: { next: "sheet19", delay: 8000 },
+    sheet19: { next: "sheet20", delay: 8000 },
+    sheet20: { next: "sheet21", delay: 9000 },
+    sheet21: { next: "sheet22", delay: 9000 },
 
     /* NEW FULL-SCREEN PHOTO SHEETS */
     sheet22: { next: "sheet23", delay: 10000 },
