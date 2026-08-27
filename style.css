@@ -1,0 +1,2729 @@
+/* =========================================================
+   RAKSHABANDHAN PROJECT — MASTER STYLESHEET
+   ========================================================= */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body {
+  width: 100%; min-height: 100vh; overflow: hidden;
+  font-family: "Poppins", sans-serif;
+  background: #08030d; color: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+body.scroll-locked { overflow: hidden; }
+
+:root {
+  --gold: #ffd76a;
+  --gold-light: #fff1a8;
+  --dark: #08030d;
+  --transition: .45s cubic-bezier(.22,1,.36,1);
+}
+
+h1,h2,h3 { font-family: "Cormorant Garamond", serif; }
+img { display:block; max-width:100%; height:auto; }
+p { line-height: 1.7; }
+button { font-family: inherit; cursor: pointer; border: none; -webkit-tap-highlight-color: transparent; }
+a { color: inherit; text-decoration: none; }
+::selection { color:#16091f; background: var(--gold); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: rgba(255,215,106,.5); border-radius: 20px; }
+
+/* =========================================================
+   APP / SHEET SYSTEM  (no global nav bar exists anymore)
+   ========================================================= */
+
+#rakshaBandhanApp { position: relative; width: 100%; height: 100vh; overflow: hidden; }
+
+.sheet {
+  position: absolute; inset: 0; width: 100%; min-height: 100vh;
+  overflow-y: auto; opacity: 0; visibility: hidden;
+  transform: scale(1.03);
+  transition: opacity .8s ease, visibility .8s ease, transform 1s cubic-bezier(.22,1,.36,1);
+  z-index: 1;
+}
+.sheet.active { opacity: 1; visibility: visible; transform: scale(1); z-index: 10; }
+.sheet-hidden { visibility: hidden; }
+
+.premium-btn, .action-btn {
+  position: relative; display: inline-flex; align-items: center; justify-content: center;
+  gap: 12px; padding: 16px 34px; color: #fff; font-size: 1rem; font-weight: 600;
+  letter-spacing: .5px;
+  background: linear-gradient(135deg, rgba(255,215,106,.25), rgba(255,255,255,.08));
+  border: 1px solid rgba(255,215,106,.65); border-radius: 50px;
+  box-shadow: 0 0 15px rgba(255,215,106,.25);
+  backdrop-filter: blur(12px);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.premium-btn:hover, .action-btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 0 28px rgba(255,215,106,.5); }
+.premium-btn:active, .action-btn:active { transform: scale(.97); }
+
+/* =========================================================
+   LOADER
+   ========================================================= */
+
+.loader {
+  position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle at center, #24102f 0%, #100615 45%, #050208 100%);
+  z-index: 99999; transition: opacity 1s ease, visibility 1s ease;
+}
+.loader.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+.loader-content { text-align: center; padding: 30px; }
+.loader-rakhi { font-size: 4rem; margin-bottom: 20px; animation: loaderRakhi 2s ease-in-out infinite; }
+.loader-content h1 { font-size: clamp(2rem,6vw,3.5rem); color: var(--gold-light); margin-bottom: 10px; }
+.loader-content p { max-width: 420px; margin: 0 auto; color: rgba(255,255,255,.7); }
+.loader-line { width: min(240px,70vw); height:3px; margin: 25px auto 0; overflow:hidden; background: rgba(255,255,255,.1); border-radius: 10px; }
+.loader-line span { display:block; width:40%; height:100%; background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), transparent); animation: loaderLine 1.5s ease-in-out infinite; }
+
+@keyframes loaderRakhi { 0%,100%{transform:scale(1) rotate(-3deg);} 50%{transform:scale(1.12) rotate(3deg);} }
+@keyframes loaderLine { 0%{transform:translateX(-130%);} 100%{transform:translateX(350%);} }
+
+/* =========================================================
+   SHARED CONTENT WRAPPER
+   ========================================================= */
+
+.sheet-content {
+  position: relative; z-index: 5; width: 100%; min-height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 60px 24px 70px; text-align: center;
+}
+
+.section-heading p { color: rgba(255,215,106,.75); font-size: .8rem; letter-spacing: 4px; margin-bottom: 8px; }
+.section-heading h1 { color: #fff4d0; font-size: clamp(2.4rem, 6vw, 4.6rem); text-shadow: 0 0 20px rgba(255,215,106,.2); }
+
+/* =========================================================
+   SHEET 1 — WELCOME  (CHANGE 1: centered + larger type)
+   ========================================================= */
+
+.sheet-1 { background: radial-gradient(circle at 50% 35%, rgba(255,185,72,.18), transparent 28%), linear-gradient(135deg, #13051b, #2a092f 45%, #10040f); }
+.sheet-1 .sheet-content { align-items: center; justify-content: center; text-align: center; }
+.opening-content {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.opening-small-text { color: var(--gold-light); font-size: clamp(.8rem,2.1vw,1.05rem); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 22px; }
+.opening-title { font-size: clamp(3.4rem, 10vw, 8rem); font-weight: 600; line-height: .95; color: #fff7dc; text-shadow: 0 0 15px rgba(255,215,106,.35); margin-bottom: 22px; }
+.opening-message { max-width: 640px; margin: 0 auto 26px; color: rgba(255,255,255,.85); font-size: clamp(1.15rem,2.4vw,1.45rem); }
+.opening-divider { display:flex; align-items:center; gap:15px; width:min(320px,65vw); margin: 8px auto 24px; color: var(--gold); }
+.opening-divider span { flex:1; height:1px; background: linear-gradient(90deg, transparent, rgba(255,215,106,.7), transparent); }
+.brother-message { margin-bottom: 36px; color: rgba(255,255,255,.75); font-size: 1.05rem; }
+.brother-message strong { display:block; margin-top:6px; color: var(--gold-light); font-family:"Cormorant Garamond",serif; font-size: 2.1rem; }
+
+/* =========================================================
+   SHEET 2 — CINEMATIC RAKHI SCENE
+   OLD DESIGN VISUALS RESTORED INTO CURRENT SYSTEM
+   (CHANGE 2: same visuals, much slower cinematic timing)
+   ========================================================= */
+
+.sheet-2 {
+    background:
+        radial-gradient(
+            circle at center,
+            #6d1a28 0%,
+            #3a0b17 38%,
+            #18050c 70%,
+            #070106 100%
+        );
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   MAIN SCENE
+   ========================================================= */
+
+.fresh-rakhi-scene {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   CENTRAL GOLDEN GLOW
+   ========================================================= */
+
+.fresh-rakhi-glow {
+    position: absolute;
+
+    width: 620px;
+    height: 620px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 225, 125, 0.34) 0%,
+            rgba(255, 180, 55, 0.18) 25%,
+            rgba(190, 45, 65, 0.10) 45%,
+            transparent 72%
+        );
+
+    filter: blur(18px);
+
+    animation:
+        freshGlowPulse 6s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   TOP INTRO
+   ========================================================= */
+
+.fresh-rakhi-intro {
+    position: absolute;
+
+    top: 8%;
+
+    width: 90%;
+
+    text-align: center;
+
+    z-index: 20;
+
+    opacity: 0;
+}
+
+.fresh-rakhi-scene.ceremony-play
+.fresh-rakhi-intro {
+    animation:
+        freshIntroReveal
+        2s
+        1s
+        forwards;
+}
+
+
+.fresh-rakhi-small {
+    display: block;
+
+    color: #f5d477;
+
+    font-size: 0.9rem;
+
+    font-weight: 500;
+
+    letter-spacing: 5px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 12px;
+
+    text-shadow:
+        0 0 12px rgba(255, 215, 100, 0.35);
+}
+
+
+.fresh-rakhi-intro h1 {
+    margin: 0;
+
+    color: #fff1bd;
+
+    font-size:
+        clamp(2.4rem, 5vw, 4.4rem);
+
+    font-weight: 600;
+
+    letter-spacing: 1px;
+
+    text-shadow:
+        0 0 15px rgba(255, 215, 100, 0.25),
+        0 0 35px rgba(255, 180, 50, 0.12);
+}
+
+
+/* Decorative line from old design */
+
+.fresh-rakhi-intro h1::after {
+    content: "";
+
+    display: block;
+
+    width: 110px;
+    height: 2px;
+
+    margin: 18px auto 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #e7b84b,
+            #fff0a0,
+            #e7b84b,
+            transparent
+        );
+
+    box-shadow:
+        0 0 12px rgba(255, 210, 100, 0.35);
+}
+
+
+/* =========================================================
+   RAKHI WRAPPER
+   ========================================================= */
+
+.fresh-rakhi-wrapper {
+    position: relative;
+
+    width: min(1100px, 96vw);
+
+    height: 420px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================================
+   RAKHI
+   ========================================================= */
+
+.fresh-rakhi {
+    position: relative;
+
+    width: 380px;
+    height: 380px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+
+    transform:
+        scale(0.4)
+        translateY(20px);
+
+    z-index: 5;
+}
+
+
+.fresh-rakhi-scene.ceremony-play
+.fresh-rakhi {
+    animation:
+        centralRakhiAppear
+        1.8s
+        3.5s
+        cubic-bezier(.22,1,.36,1)
+        forwards;
+}
+
+
+/* =========================================================
+   RAKHI CENTER
+   ========================================================= */
+
+.fresh-rakhi-center {
+    position: relative;
+
+    width: 250px;
+    height: 250px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    transform: rotate(-6deg);
+
+    filter:
+        drop-shadow(
+            0 0 25px rgba(255, 210, 90, 0.25)
+        );
+}
+
+
+/* =========================================================
+   RAKHI RINGS
+   ========================================================= */
+
+.fresh-ring {
+    position: absolute;
+
+    border-radius: 50%;
+}
+
+
+.ring-one {
+    width: 250px;
+    height: 250px;
+
+    background:
+        radial-gradient(
+            circle at 32% 28%,
+            #fff5b8 0%,
+            #e0a52b 42%,
+            #a2670b 72%,
+            #623b05 100%
+        );
+
+    border:
+        2px solid rgba(255, 232, 145, 0.85);
+
+    box-shadow:
+        0 0 22px rgba(255, 215, 100, 0.18);
+}
+
+
+.ring-two {
+    width: 198px;
+    height: 198px;
+
+    background:
+        conic-gradient(
+            #8b1320,
+            #efbd4c,
+            #8b1320,
+            #f2c75a,
+            #8b1320
+        );
+
+    border:
+        3px solid rgba(255, 224, 120, 0.75);
+}
+
+
+.ring-three {
+    width: 138px;
+    height: 138px;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fff0a0,
+            #d39420 50%,
+            #824d08 100%
+        );
+
+    border:
+        3px solid rgba(255, 239, 163, 0.9);
+}
+
+
+/* =========================================================
+   CENTRAL GEM
+   ========================================================= */
+
+.fresh-rakhi-gem {
+    width: 76px;
+    height: 76px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #fff7c5;
+
+    font-size: 2.6rem;
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #ffe77b,
+            #d38a14 55%,
+            #7a4105
+        );
+
+    border:
+        3px solid rgba(255, 243, 170, 0.95);
+
+    transform: rotate(45deg);
+
+    box-shadow:
+        0 0 18px rgba(255, 215, 90, 0.35);
+}
+
+
+/* =========================================================
+   RAKHI THREADS
+   ========================================================= */
+
+.fresh-thread {
+    position: absolute;
+
+    top: 50%;
+
+    width: 430px;
+    height: 12px;
+
+    border-radius: 20px;
+
+    opacity: 0;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #80121d 0 16px,
+            #d6a02e 16px 32px,
+            #f3d56c 32px 48px,
+            #971823 48px 64px
+        );
+
+    box-shadow:
+        0 0 8px rgba(255, 210, 80, 0.18);
+}
+
+
+.fresh-thread-left {
+    right: 50%;
+
+    transform-origin: right center;
+}
+
+
+.fresh-thread-right {
+    left: 50%;
+
+    transform-origin: left center;
+}
+
+
+/* =========================================================
+   THREAD ANIMATIONS  (slower, more spaced out)
+   ========================================================= */
+
+.fresh-rakhi-scene.ceremony-play
+.thread-left-1 {
+    animation:
+        leftThread
+        2.6s
+        6s
+        cubic-bezier(.22,1,.36,1)
+        forwards;
+}
+
+
+.fresh-rakhi-scene.ceremony-play
+.thread-left-2 {
+    animation:
+        leftThread
+        2.6s
+        6.35s
+        cubic-bezier(.22,1,.36,1)
+        forwards;
+}
+
+
+.fresh-rakhi-scene.ceremony-play
+.thread-left-3 {
+    animation:
+        leftThread
+        2.6s
+        6.7s
+        cubic-bezier(.22,1,.36,1)
+        forwards;
+}
+
+
+.fresh-rakhi-scene.ceremony-play
+.thread-right-1 {
+    animation:
+        rightThread
+        2.6s
+        6.5s
+        cubic-bezier(.22,1,.36,1)
+        forwards;
+}
+
+
+.fresh-rakhi-scene.ceremony-play
+.thread-right-2 {
+    animation:
+        rightThread
+        2.6s
+        6.85s
+        cubic-bezier(.22,1,.36,1)
+        forwards;
+}
+
+
+.fresh-rakhi-scene.ceremony-play
+.thread-right-3 {
+    animation:
+        rightThread
+        2.6s
+        7.2s
+        cubic-bezier(.22,1,.36,1)
+        forwards;
+}
+
+
+/* =========================================================
+   FINAL MESSAGE
+   ========================================================= */
+
+.fresh-rakhi-message {
+    position: absolute;
+
+    bottom: 12%;
+
+    text-align: center;
+
+    width: 90%;
+
+    z-index: 20;
+
+    opacity: 0;
+
+    transform: translateY(30px);
+}
+
+
+.fresh-rakhi-scene.ceremony-play
+.fresh-rakhi-message {
+    animation:
+        messageReveal
+        2s
+        10.5s
+        cubic-bezier(.22,1,.36,1)
+        forwards;
+}
+
+
+.fresh-rakhi-message h2 {
+    margin: 0;
+
+    color: #ffe7a0;
+
+    font-size:
+        clamp(2rem, 4vw, 3.2rem);
+
+    text-shadow:
+        0 0 18px rgba(255, 210, 100, 0.22);
+}
+
+
+.fresh-rakhi-message p {
+    margin:
+        12px auto 0;
+
+    max-width: 650px;
+
+    color:
+        rgba(255, 235, 190, 0.88);
+
+    font-size:
+        clamp(1.05rem, 1.7vw, 1.25rem);
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes freshGlowPulse {
+
+    0%,
+    100% {
+        transform: scale(0.9);
+        opacity: 0.65;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+}
+
+
+@keyframes freshIntroReveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+@keyframes centralRakhiAppear {
+
+    0% {
+        opacity: 0;
+        transform:
+            scale(0.45)
+            translateY(20px);
+    }
+
+    70% {
+        opacity: 1;
+        transform:
+            scale(1.08)
+            translateY(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            scale(1)
+            translateY(0);
+    }
+
+}
+
+
+@keyframes leftThread {
+
+    0% {
+        opacity: 0;
+        transform:
+            translateY(-50%)
+            translateX(-520px);
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            translateY(-50%)
+            translateX(0);
+    }
+
+}
+
+
+@keyframes rightThread {
+
+    0% {
+        opacity: 0;
+        transform:
+            translateY(-50%)
+            translateX(520px);
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            translateY(-50%)
+            translateX(0);
+    }
+
+}
+
+
+@keyframes messageReveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .fresh-rakhi-glow {
+        width: 420px;
+        height: 420px;
+    }
+
+    .fresh-rakhi-wrapper {
+        height: 360px;
+    }
+
+    .fresh-rakhi {
+        width: 290px;
+        height: 290px;
+    }
+
+    .fresh-rakhi-center {
+        width: 190px;
+        height: 190px;
+    }
+
+    .ring-one {
+        width: 190px;
+        height: 190px;
+    }
+
+    .ring-two {
+        width: 150px;
+        height: 150px;
+    }
+
+    .ring-three {
+        width: 105px;
+        height: 105px;
+    }
+
+    .fresh-rakhi-gem {
+        width: 58px;
+        height: 58px;
+        font-size: 2rem;
+    }
+
+    .fresh-thread {
+        width: 260px;
+        height: 9px;
+    }
+
+    .fresh-rakhi-intro {
+        top: 7%;
+    }
+
+    .fresh-rakhi-message {
+        bottom: 8%;
+    }
+
+}
+/* =========================================================
+   SHEET 3 — MEET THE THREE SISTERS
+   (CHANGE 3: much larger photos, bigger type, fills screen)
+   ========================================================= */
+
+.sheet-3 {
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            #3d1b4c 0%,
+            #1b0a27 48%,
+            #08030d 100%
+        );
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   HEADING — MOVE HIGHER
+   ========================================================= */
+
+.sheet-3 .sheet-content {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    padding-top: 6vh;
+}
+
+
+.sheet-3 .section-heading {
+    text-align: center;
+
+    width: 100%;
+
+    margin-bottom: 30px;
+}
+
+
+.sheet-3 .section-heading p {
+    margin: 0 0 10px;
+
+    font-size: 0.8rem;
+
+    letter-spacing: 4px;
+
+    color: #e8c45f;
+
+    text-transform: uppercase;
+}
+
+
+.sheet-3 .section-heading h1 {
+    margin: 0;
+
+    color: #fff1c7;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size:
+        clamp(2.6rem, 5vw, 4.3rem);
+
+    font-weight: 600;
+
+    line-height: 1.05;
+
+    text-align: center;
+
+    text-shadow:
+        0 0 18px rgba(255, 215, 106, 0.22);
+}
+
+
+/* =========================================================
+   THREE SISTERS — MUCH LARGER, FILLS THE SCREEN
+   ========================================================= */
+
+.sheet-3 .sisters-grid {
+    width: min(1450px, 97vw);
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: clamp(24px, 4vw, 60px);
+
+    align-items: start;
+
+    justify-items: center;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   SISTER CARD
+   ========================================================= */
+
+.sheet-3 .sister-card {
+    width: 100%;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   BIGGER GOLDEN PHOTO FRAME
+   ========================================================= */
+
+.sheet-3 .golden-frame {
+    position: relative;
+
+    width: min(430px, 100%);
+
+    aspect-ratio: 1 / 1;
+
+    margin: 0 auto 22px;
+
+    padding: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff1a8 0%,
+            #b47a13 25%,
+            #ffe18a 50%,
+            #9b650d 75%,
+            #fff0a0 100%
+        );
+
+    box-shadow:
+        0 0 25px rgba(255, 215, 106, 0.42),
+        0 0 45px rgba(255, 190, 60, 0.14);
+}
+
+
+/* =========================================================
+   PHOTO
+   ========================================================= */
+
+.sheet-3 .sister-photo {
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background: #1b0d20;
+}
+
+
+.sheet-3 .sister-photo img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    transition:
+        transform 0.5s ease;
+}
+
+
+/* Small elegant zoom on hover */
+
+.sheet-3 .sister-card:hover .sister-photo img {
+    transform: scale(1.04);
+}
+
+
+/* =========================================================
+   NICKNAMES — BIGGER
+   ========================================================= */
+
+.sheet-3 .sister-nickname {
+    margin-top: 6px;
+
+    color: #fff4d4;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-weight: 600;
+
+    font-size:
+        clamp(2.2rem, 3.6vw, 3.3rem);
+
+    line-height: 1.1;
+
+    text-shadow:
+        0 0 14px rgba(255, 215, 106, 0.28);
+}
+
+
+/* =========================================================
+   REAL NAMES — BIGGER + DIFFERENT COLOUR
+   ========================================================= */
+
+.sheet-3 .sister-realname {
+    display: block;
+
+    margin-top: 8px;
+
+    color: #e7c86a;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size:
+        clamp(1.3rem, 2.3vw, 1.65rem);
+
+    font-weight: 500;
+
+    letter-spacing: 1.5px;
+
+    line-height: 1.2;
+
+    text-shadow:
+        0 0 8px rgba(231, 200, 106, 0.18);
+}
+
+
+/* =========================================================
+   EXTRA EMPHASIS FOR CHOTA DON / PUJITHA
+   ========================================================= */
+
+.sheet-3 .sister-card:nth-child(3) .sister-nickname {
+    font-size:
+        clamp(2.4rem, 3.9vw, 3.5rem);
+}
+
+
+.sheet-3 .sister-card:nth-child(3) .sister-realname {
+    font-size:
+        clamp(1.4rem, 2.5vw, 1.75rem);
+
+    color: #ffd96b;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   BOTTOM MESSAGE — KEEP CLOSE TO CARDS
+   ========================================================= */
+
+.sheet-3 .sisters-bottom-message {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin-top: 34px;
+
+    color:
+        rgba(255, 255, 255, 0.72);
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(1.3rem, 2.6vw, 1.65rem);
+
+    line-height: 1.3;
+
+    text-align: center;
+}
+
+
+.sheet-3 .sisters-bottom-message p {
+    margin: 0;
+}
+
+
+.sheet-3 .sisters-bottom-message span {
+    color: var(--gold);
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .sheet-3 .sheet-content {
+        padding-top: 5vh;
+    }
+
+    .sheet-3 .section-heading {
+        margin-bottom: 25px;
+    }
+
+    .sheet-3 .golden-frame {
+        width: min(320px, 100%);
+    }
+
+    .sheet-3 .sisters-grid {
+        gap: 22px;
+        width: 94vw;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .sheet-3 {
+        overflow-y: auto;
+    }
+
+    .sheet-3 .sheet-content {
+        height: auto;
+        min-height: 100%;
+        padding:
+            40px 20px
+            50px;
+    }
+
+    .sheet-3 .section-heading {
+        margin-bottom: 28px;
+    }
+
+    .sheet-3 .section-heading h1 {
+        font-size: 2.5rem;
+    }
+
+    .sheet-3 .sisters-grid {
+        grid-template-columns: 1fr;
+
+        width: min(420px, 94vw);
+
+        gap: 40px;
+    }
+
+    .sheet-3 .golden-frame {
+        width: min(360px, 92vw);
+    }
+
+    .sheet-3 .sister-nickname {
+        font-size: 2.3rem;
+    }
+
+    .sheet-3 .sister-realname {
+        font-size: 1.35rem;
+    }
+
+    .sheet-3 .sisters-bottom-message {
+        margin-top: 35px;
+    }
+
+}
+/* =========================================================
+   SHEET 4 — OPEN YOUR SURPRISE
+   Redesigned: large heading, three sisters stacked VERTICALLY,
+   each with a large image + decorative nickname + real name + button
+   ========================================================= */
+
+.sheet-4 { background: radial-gradient(circle at 50% 30%, rgba(255,206,100,.18), transparent 28%), linear-gradient(135deg,#17051f,#32102f 48%,#0d0612); }
+.sheet-4 .section-heading h1 { font-size: clamp(3rem, 7vw, 5.4rem); }
+.selection-message { max-width: 680px; margin-top:-10px; margin-bottom: 40px; color: rgba(255,255,255,.7); font-size: clamp(1rem,2vw,1.2rem); }
+
+.sister-select-list { width: min(760px, 94vw); display:flex; flex-direction: column; gap: 55px; }
+
+.sister-select-item {
+  width: 100%; display:flex; flex-direction:column; align-items:center;
+  padding: 30px 20px 36px;
+  background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,215,106,.025));
+  border: 1px solid rgba(255,215,106,.28); border-radius: 30px;
+  box-shadow: 0 25px 60px rgba(0,0,0,.3);
+}
+
+.sister-select-photo {
+  width: min(340px, 78vw); aspect-ratio: 1; padding: 9px; margin-bottom: 22px;
+  background: linear-gradient(135deg,#fff1a8,#9d660d,#ffd76a,#8a5609,#fff0a0);
+  box-shadow: 0 0 25px rgba(255,215,106,.3);
+}
+.sister-select-photo img { width:100%; height:100%; object-fit:cover; }
+
+.sister-select-nickname {
+  font-family: "Cormorant Garamond", serif; font-weight: 700; font-style: italic;
+  font-size: clamp(2.2rem, 5vw, 3.4rem); color: #ffe7a0;
+  text-shadow: 0 0 18px rgba(255,215,106,.3);
+}
+.sister-select-realname {
+  display:block; margin-top: 8px; color: #cfe7ff; font-family: "Poppins", sans-serif;
+  font-weight: 500; letter-spacing: 2px; font-size: clamp(1.05rem, 2.4vw, 1.4rem);
+}
+
+.open-sister-surprise {
+  margin-top: 26px; padding: 15px 30px; color:#fff8e2;
+  background: linear-gradient(135deg, rgba(255,215,106,.22), rgba(255,255,255,.06));
+  border: 1px solid rgba(255,215,106,.5); border-radius: 34px;
+  font-size: 1rem; font-weight: 600;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.open-sister-surprise:hover { transform: translateY(-3px); box-shadow: 0 0 24px rgba(255,215,106,.35); }
+
+/* =========================================================
+   SHEETS 5A / 5B / 5C — PERSONAL SURPRISE
+   (CHANGE 4: centered, larger image + type, consistent layout)
+   ========================================================= */
+
+.sheet-5 { background: radial-gradient(circle at 70% 30%, rgba(255,215,106,.16), transparent 28%), linear-gradient(135deg,#1a071e,#2b0c27 48%,#0b040f); }
+.sheet-5b { background: radial-gradient(circle at 25% 25%, rgba(132,205,255,.13), transparent 30%), linear-gradient(135deg,#080e1c,#151d3c 48%,#07040e); }
+.sheet-5c { background: radial-gradient(circle at 70% 20%, rgba(255,105,180,.17), transparent 28%), linear-gradient(135deg,#21051b,#3a0a30 48%,#10040e); }
+
+.sheet-5 .sheet-content { align-items: center; justify-content: center; text-align: center; }
+.personal-surprise-content {
+  width: min(800px, 94vw);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.personal-label { color: rgba(255,215,106,.75); font-size: .85rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 12px; }
+
+.personal-image-wrapper { width: min(520px, 90vw); aspect-ratio: 1; margin: 0 auto 34px; padding: 11px; background: linear-gradient(135deg,#fff1a8,#9d660d,#ffd76a,#8a5609,#fff0a0); box-shadow: 0 0 35px rgba(255,215,106,.4); }
+.personal-image-wrapper img { width:100%; height:100%; object-fit:cover; }
+
+.personal-surprise-content > h1 { color:#fff3ce; font-size: clamp(2.8rem, 6.5vw, 5rem); margin-bottom: 26px; text-shadow: 0 0 22px rgba(255,215,106,.25); }
+
+.personal-message { max-width: 700px; margin: 0 auto; color: rgba(255,255,255,.9); font-family:"Cormorant Garamond",serif; font-size: clamp(1.4rem, 2.8vw, 1.95rem); line-height: 1.85; }
+
+.personal-actions { display:flex; align-items:center; justify-content:center; gap: 16px; margin-top: 40px; flex-wrap: wrap; }
+.sister-next-btn {
+  padding: 16px 32px; color:#fff6dc; background: linear-gradient(135deg, rgba(255,215,106,.22), rgba(255,215,106,.06));
+  border: 1px solid rgba(255,215,106,.45); border-radius: 34px; font-size: 1.05rem;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.sister-next-btn:hover { transform: translateY(-3px); box-shadow: 0 0 22px rgba(255,215,106,.3); }
+
+/* =========================================================
+   SHEET 6 — NEW SCRAPBOOK
+   (CHANGE 5: bigger cards, bigger images/text, spread out more)
+   ========================================================= */
+
+.sheet-6.scrapbook-sheet {
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255,190,90,.16), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(255,90,150,.12), transparent 30%),
+        linear-gradient(135deg, #180b18, #32101f 45%, #120611);
+
+    overflow: hidden;
+}
+
+.scrapbook-page {
+    width: 100%;
+    min-height: 100%;
+    padding: 50px 30px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ---------- HEADING ---------- */
+
+.scrapbook-heading {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.scrapbook-heading span {
+    display: block;
+    color: #f5c86b;
+    font-family: "Poppins", sans-serif;
+    font-size: .8rem;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+}
+
+.scrapbook-heading h1 {
+    margin: 0;
+    color: #fff0c4;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2.8rem, 5.5vw, 4.6rem);
+    font-weight: 700;
+    text-shadow: 0 0 25px rgba(255,205,100,.25);
+}
+
+.scrapbook-heading p {
+    margin-top: 8px;
+    color: rgba(255,235,210,.78);
+    font-family: "Poppins", sans-serif;
+    font-size: 1.05rem;
+}
+
+
+/* ---------- SCRAPBOOK BOOK ---------- */
+
+.scrapbook-book {
+    width: min(1400px, 97vw);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 50px 55px;
+    align-items: center;
+}
+
+
+/* ---------- INDIVIDUAL SCRAPBOOK ---------- */
+
+.scrap-card {
+    position: relative;
+
+    min-height: 420px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+
+    padding: 24px;
+
+    background:
+        linear-gradient(135deg,
+            #ead09b,
+            #fff0bd 45%,
+            #d8b36c);
+
+    border: 2px solid rgba(125,75,25,.7);
+
+    box-shadow:
+        0 18px 35px rgba(0,0,0,.45),
+        inset 0 0 0 5px rgba(255,248,210,.45);
+
+    transition:
+        transform .4s ease,
+        box-shadow .4s ease;
+}
+
+.scrap-card:hover {
+    transform: rotate(0deg) scale(1.02);
+    box-shadow:
+        0 25px 45px rgba(0,0,0,.55),
+        0 0 30px rgba(255,205,100,.18);
+}
+
+
+/* ---------- DIFFERENT DIRECTIONS ---------- */
+
+.scrap-one {
+    transform: rotate(-1.8deg);
+}
+
+.scrap-two {
+    transform: rotate(1.8deg);
+}
+
+.scrap-three {
+    transform: rotate(1.4deg);
+}
+
+.scrap-four {
+    transform: rotate(-1.5deg);
+}
+
+
+/* ---------- TAPE EFFECT ---------- */
+
+.scrap-card::before {
+    content: "";
+    position: absolute;
+
+    width: 100px;
+    height: 26px;
+
+    top: -12px;
+    left: 30px;
+
+    background: rgba(238,178,128,.82);
+
+    transform: rotate(-5deg);
+
+    box-shadow: 0 2px 5px rgba(0,0,0,.15);
+
+    z-index: 5;
+}
+
+.scrap-two::before {
+    left: auto;
+    right: 32px;
+    transform: rotate(7deg);
+    background: rgba(155,190,205,.82);
+}
+
+.scrap-three::before {
+    left: 40%;
+    transform: rotate(3deg);
+    background: rgba(232,151,177,.8);
+}
+
+.scrap-four::before {
+    left: auto;
+    right: 38px;
+    transform: rotate(-6deg);
+    background: rgba(180,155,210,.8);
+}
+
+
+/* ---------- IMAGE ---------- */
+
+.scrap-image {
+    width: 100%;
+    height: 320px;
+
+    padding: 8px;
+
+    background: #fff8e4;
+
+    border: 1px solid rgba(100,65,25,.4);
+
+    box-shadow: 0 7px 14px rgba(0,0,0,.25);
+
+    overflow: hidden;
+}
+
+.scrap-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* ---------- TEXT ---------- */
+
+.scrap-note {
+    padding: 22px 26px;
+
+    text-align: center;
+
+    color: #4c2d20;
+}
+
+.scrap-note h2 {
+    margin: 0 0 16px;
+
+    color: #5b2d25;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: clamp(1.8rem, 2.8vw, 2.5rem);
+
+    font-weight: 700;
+}
+
+.scrap-note p {
+    margin: 0 auto 18px;
+
+    max-width: 360px;
+
+    color: #5e4437;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+
+    line-height: 1.75;
+}
+
+.scrap-note span {
+    display: block;
+
+    color: #8d3e55;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 1.2rem;
+
+    font-weight: 600;
+}
+
+
+/* ---------- FOOTER ---------- */
+
+.scrapbook-footer {
+    margin-top: 32px;
+
+    color: #f3d486;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 1.25rem;
+
+    text-align: center;
+
+    letter-spacing: .5px;
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 850px) {
+
+    .scrapbook-page {
+        padding: 40px 18px 25px;
+    }
+
+    .scrapbook-book {
+        grid-template-columns: 1fr;
+        width: min(650px, 94vw);
+        gap: 35px;
+    }
+
+    .scrap-card {
+        min-height: 270px;
+    }
+
+    .scrap-image {
+        height: 210px;
+    }
+
+}
+
+@media (max-width: 560px) {
+
+    .scrap-card {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .scrap-image {
+        height: 230px;
+    }
+
+    .scrap-note {
+        padding: 15px;
+    }
+
+}
+/* =========================================================
+   SHEET 7 — LAST YEAR'S RAKHI MEMORIES  (enlarged)
+   ========================================================= */
+/* =========================================================
+   MEMORIES SHEET — LARGE PHOTO + SIDE TEXT
+   ========================================================= */
+
+.sheet-7.memories-sheet {
+
+    background:
+        radial-gradient(
+            circle at 50% 10%,
+            rgba(70,110,180,.22),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #07182f,
+            #102b50 50%,
+            #071326
+        );
+
+    overflow: hidden;
+}
+
+
+.memories-page {
+
+    width: 100%;
+
+    min-height: 100%;
+
+    padding: 55px 35px 45px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+
+/* ---------- HEADING ---------- */
+
+.memories-heading {
+
+    text-align: center;
+
+    margin-bottom: 40px;
+
+    width: min(900px, 94vw);
+}
+
+.memories-heading span {
+
+    display: block;
+
+    color: #e9c66e;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: .75rem;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 8px;
+}
+
+.memories-heading h1 {
+
+    margin: 0;
+
+    color: #fff0c4;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: clamp(2.5rem, 5vw, 4rem);
+
+    text-shadow:
+        0 0 25px rgba(255,210,110,.2);
+}
+
+.memories-heading p {
+
+    margin-top: 10px;
+
+    color: rgba(255,240,215,.75);
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: 1rem;
+}
+
+
+/* ---------- MEMORY STORY ---------- */
+
+.memory-story {
+
+    width: min(1150px, 94vw);
+
+    min-height: 320px;
+
+    display: grid;
+
+    grid-template-columns: 1.15fr 1fr;
+
+    align-items: center;
+
+    gap: 55px;
+
+    margin-bottom: 42px;
+
+    padding: 25px 35px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.025)
+        );
+
+    border: 1px solid rgba(232,197,111,.28);
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.28);
+
+    backdrop-filter: blur(7px);
+}
+
+
+/* ---------- ALTERNATING LAYOUT ---------- */
+
+.memory-two {
+
+    grid-template-columns: 1fr 1.15fr;
+}
+
+
+/* ---------- PHOTO ---------- */
+
+.memory-photo {
+
+    width: 100%;
+
+    height: 310px;
+
+    padding: 9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff0a2,
+            #b77b18,
+            #ffe48a,
+            #98630d
+        );
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 0 25px rgba(255,207,94,.22),
+        0 18px 35px rgba(0,0,0,.35);
+}
+
+.memory-photo img {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 3px;
+}
+
+
+/* ---------- TEXT ---------- */
+
+.memory-text {
+
+    padding: 15px 5px;
+
+    color: #fff0d0;
+}
+
+.memory-number {
+
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    color: #e7bd58;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: .8rem;
+
+    letter-spacing: 4px;
+}
+
+.memory-text h2 {
+
+    margin: 0 0 18px;
+
+    color: #ffe7ad;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: clamp(2rem, 3.5vw, 3rem);
+
+    font-weight: 700;
+}
+
+.memory-text p {
+
+    margin: 0 0 13px;
+
+    max-width: 520px;
+
+    color: rgba(255,239,215,.84);
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+
+    line-height: 1.8;
+}
+
+.memory-text strong {
+
+    display: block;
+
+    margin-top: 18px;
+
+    color: #f2ce76;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+}
+
+
+/* ---------- DIFFERENT VISUAL DIRECTION ---------- */
+
+.memory-one .memory-photo {
+
+    transform: rotate(-1deg);
+}
+
+.memory-two .memory-photo {
+
+    transform: rotate(1deg);
+}
+
+.memory-three .memory-photo {
+
+    transform: rotate(-1deg);
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 850px) {
+
+    .memories-page {
+
+        padding: 40px 18px 30px;
+    }
+
+    .memory-story,
+    .memory-two {
+
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+
+        padding: 22px;
+
+        margin-bottom: 30px;
+    }
+
+    .memory-photo {
+
+        height: 280px;
+    }
+
+    .memory-text {
+
+        text-align: center;
+    }
+
+    .memory-text p {
+
+        margin-left: auto;
+
+        margin-right: auto;
+    }
+
+}
+/* =========================================================
+   SHEET 8 — MY PROMISE  (CHANGE 6: centered + larger type)
+   ========================================================= */
+
+.sheet-8 { background: radial-gradient(circle at center, #182c52 0%, #0b1529 45%, #03070e 100%); }
+.sheet-8 .sheet-content { align-items: center; justify-content: center; text-align: center; }
+.promise-content { width: min(840px, 92vw); margin: 0 auto; display:flex; flex-direction:column; align-items:center; text-align:center; }
+.promise-symbol { font-size: 3.1rem; }
+.promise-label { margin-top: 12px; color: rgba(255,215,106,.65); font-size: .8rem; letter-spacing: 4px; }
+.promise-content h1 { margin: 10px 0 22px; color:#fff3d0; font-size: clamp(3.2rem, 7.5vw, 6.2rem); text-shadow: 0 0 30px rgba(255,215,106,.2); }
+.promise-text { display:flex; flex-direction:column; align-items:center; gap: 18px; margin-bottom: 34px; }
+.promise-text p { color: rgba(255,255,255,.9); font-family:"Cormorant Garamond",serif; font-size: clamp(1.6rem, 3.2vw, 2.15rem); }
+.promise-text p:last-child { color: #fff0b8; }
+.main-promise { width: 100%; padding: 36px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,215,106,.2); border-radius: 24px; margin-bottom: 26px; }
+.main-promise p { color: rgba(255,255,255,.88); font-size: clamp(1.2rem, 2.4vw, 1.55rem); line-height: 1.95; }
+.promise-signature p { color: rgba(255,255,255,.6); font-size: 1rem; }
+.promise-signature h2 { margin-top: 6px; color: var(--gold-light); font-size: clamp(1.9rem, 3.2vw, 2.5rem); }
+
+/* =========================================================
+   SHEET 9 — WHAT IS RAKHI?  (larger cards + text)
+   ========================================================= */
+
+.sheet-9 { background: linear-gradient(135deg,#e9d7ad,#f5e9ca 50%,#d8bc8a); color:#362512; }
+.story-title { text-align:center; margin-bottom: 30px; }
+.story-title p { color: rgba(78,50,20,.6); font-size: .75rem; letter-spacing: 4px; }
+.story-title h1 { color:#533317; font-size: clamp(2.8rem, 7vw, 5.4rem); }
+.sketch-story { width: min(920px, 96vw); display:flex; flex-direction:column; align-items:center; gap: 26px; }
+.story-scene { width: min(760px,100%); min-height: 170px; display:flex; align-items:center; justify-content:center; gap: 30px; padding: 30px 34px; background: rgba(255,250,235,.6); border: 2px dashed rgba(92,59,25,.28); border-radius: 16px; }
+.sketch-rakhi,.sketch-brother,.sketch-sister,.sketch-celebration { font-size: clamp(3.2rem, 7vw, 5.6rem); }
+.story-scene p { max-width: 420px; color:#563719; font-family:"Cormorant Garamond",serif; font-size: clamp(1.35rem, 2.8vw, 1.75rem); line-height: 1.6; }
+
+/* =========================================================
+   SHEET 10 — ONCE UPON A TIME  (Raksha Bandhan history)
+   ========================================================= */
+
+.sheet-10 { background: radial-gradient(circle at center, #332217, #130c08 55%, #050302 100%); }
+.film-opening { text-align:center; margin-bottom: 40px; }
+.film-opening span { font-size: 2.4rem; margin-bottom: 12px; display:block; }
+.film-opening h1 { color:#f4dfae; font-size: clamp(2.8rem, 7vw, 5.8rem); }
+.film-opening p { margin-top: 8px; color: rgba(255,255,255,.6); letter-spacing: 2px; font-size: 1.05rem; }
+.history-scenes { width: min(980px, 96vw); display:flex; flex-direction:column; gap: 28px; }
+.history-scene { display:grid; grid-template-columns: 190px 1fr; align-items:center; gap: 32px; padding: 28px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,215,106,.14); border-radius: 16px; }
+.history-sketch { min-height: 140px; display:flex; align-items:center; justify-content:center; color:#e9c976; font-size: 3.4rem; border: 1px dashed rgba(255,215,106,.22); }
+.history-text span { color: rgba(255,215,106,.6); font-size: .65rem; letter-spacing: 3px; }
+.history-text h2 { margin: 8px 0 10px; color:#f5dfa9; font-size: clamp(1.7rem, 3.4vw, 2.5rem); }
+.history-text p { color: rgba(255,255,255,.7); font-size: clamp(1rem, 2vw, 1.25rem); line-height: 1.85; }
+.history-ending { margin-top: 36px; text-align:center; }
+.history-ending p { color: rgba(255,255,255,.6); font-family:"Cormorant Garamond",serif; font-size: 1.3rem; }
+.history-ending h2 { margin-top: 8px; color:#f4d98c; font-size: clamp(1.8rem, 3vw, 2.4rem); }
+
+/* =========================================================
+   SHEET 11 — GRAND HAPPY RAKSHA BANDHAN
+   (CHANGE 7: centered + more readable)
+   ========================================================= */
+
+.sheet-11 { background: radial-gradient(circle at center, #4a1739 0%, #24091e 45%, #08030a 100%); }
+.sheet-11 .sheet-content { align-items: center; justify-content: center; text-align: center; }
+.grand-celebration-content { width: min(900px, 94vw); margin: 0 auto; display:flex; flex-direction:column; align-items:center; text-align:center; }
+.celebration-small-title { color: rgba(255,215,106,.7); font-size: .8rem; letter-spacing: 4px; }
+.three-names { display:flex; flex-direction:column; align-items:center; gap: 8px; margin: 20px 0 14px; }
+.sister-name-reveal { color:#fff0bf; font-family:"Cormorant Garamond",serif; font-size: clamp(1.35rem, 2.7vw, 1.9rem); }
+.grand-rakhi-center { font-size: 5.5rem; }
+.grand-title { margin: 12px 0; color:#fff6d8; font-size: clamp(3.4rem, 9vw, 7.5rem); line-height: .85; text-shadow: 0 0 20px rgba(255,215,106,.35); }
+.grand-title span { display:block; color:#ffd76a; font-size: .72em; }
+.grand-subtitle { margin-top: 18px; color: rgba(255,255,255,.8); font-size: 1.2rem; }
+.grand-message { margin-top: 24px; color: rgba(255,255,255,.8); font-family:"Cormorant Garamond",serif; font-size: clamp(1.3rem, 2.7vw, 1.7rem); }
+.grand-signature { display:flex; flex-direction:column; align-items:center; margin-top: 24px; color: rgba(255,255,255,.55); font-size: .92rem; }
+.grand-signature strong { margin-top: 4px; color:#ffe9a2; font-family:"Cormorant Garamond",serif; font-size: 1.65rem; }
+
+/* =========================================================
+   SHEET 12 — RAKHI TYING CEREMONY (ceremony-only Rakhi visuals)
+   (CHANGE 8: "Tie Rakhi" intro moved to true vertical center)
+   ========================================================= */
+
+.sheet-12 { position:relative; display:flex; align-items:center; justify-content:center; background: radial-gradient(circle at 50% 45%, rgba(255,190,70,.18), transparent 35%), linear-gradient(145deg,#320609,#67151a 50%,#170204); }
+.ceremony-start { position:relative; z-index:20; width:min(90%,650px); margin: 0 auto; text-align:center; padding: 40px 25px; opacity:1; transform:scale(1); transition: opacity .8s ease, transform .8s ease; }
+.ceremony-start.hidden { opacity:0; transform: scale(.94); pointer-events:none; }
+.ceremony-intro-decoration { font-size: 52px; margin-bottom: 20px; }
+.ceremony-eyebrow { margin: 0 0 12px; font-size: 14px; font-weight: 700; letter-spacing: 2px; color:#ffd76a; text-transform: uppercase; }
+.ceremony-title { margin: 0 0 16px; font-size: clamp(34px,5vw,58px); color:#fff0b0; text-shadow: 0 0 12px rgba(255,190,70,.55); }
+.ceremony-description { max-width: 520px; margin: 0 auto 30px; font-size: 18px; line-height: 1.75; color: rgba(255,255,255,.9); }
+.tie-rakhi-button { padding: 16px 36px; border: 1px solid #ffd76a; border-radius: 50px; background: linear-gradient(135deg,#d51f3c,#9e1229); color:#fff; font-size: 17px; font-weight: 700; box-shadow: 0 8px 25px rgba(0,0,0,.3); transition: transform .25s ease; }
+.tie-rakhi-button:hover { transform: translateY(-3px); }
+
+.ceremony-stage { position:absolute; inset:0; z-index:10; opacity:0; visibility:hidden; pointer-events:none; transition: opacity .9s ease, visibility .9s ease; }
+.ceremony-stage.active { opacity:1; visibility:visible; pointer-events:auto; }
+.ceremony-stage-heading { position:absolute; top:6%; left:50%; transform: translateX(-50%); width:90%; text-align:center; }
+.ceremony-small-title { color:#ffd76a; font-size: 14px; font-weight:700; letter-spacing:2px; }
+.ceremony-stage-heading h2 { font-size: clamp(28px,4vw,46px); color:#fff0b0; }
+
+.brother-hand { position:absolute; left:-280px; bottom:25%; width:280px; height:115px; border-radius:65px 25px 25px 65px; background: linear-gradient(145deg,#f4bd8c,#c9805d); transition: left 2.2s cubic-bezier(.22,1,.36,1); }
+.ceremony-stage.active .brother-hand.hand-entered { left: 14%; }
+.brother-wrist { position:absolute; right:-8px; top:28px; width:85px; height:58px; border-radius:30px; background: linear-gradient(145deg,#efb17f,#c97856); }
+.sister-hand { position:absolute; right:-280px; bottom:27%; width:270px; height:110px; border-radius:25px 65px 65px 25px; background: linear-gradient(145deg,#f6c49a,#ca8564); transition: right 2.2s cubic-bezier(.22,1,.36,1); }
+.ceremony-stage.active .sister-hand.sister-hand-entered { right: 14%; }
+.sister-fingers { position:absolute; left:-8px; top:20px; display:flex; gap:5px; }
+.sister-fingers span { display:block; width:28px; height:58px; border-radius:18px; background: linear-gradient(145deg,#f8c9a0,#d58b69); }
+
+.rakhi-thali { position:absolute; left:50%; top:51%; width:220px; height:220px; transform: translate(-50%,-50%) scale(.7); opacity:0; transition: opacity 1.2s ease, transform 1.2s cubic-bezier(.22,1,.36,1); }
+.ceremony-stage.active .rakhi-thali.thali-entered { opacity:1; transform: translate(-50%,-50%) scale(1); }
+.thali-rim { width:100%; height:100%; padding:10px; border-radius:50%; background: linear-gradient(145deg,#ffe28a,#c99522); }
+.thali-center { position:relative; width:100%; height:100%; border-radius:50%; background: radial-gradient(circle,#e7ae38,#a96a17); border: 2px solid rgba(255,255,255,.35); }
+
+.ceremony-diya { position:absolute; left:50%; top:45%; transform: translate(-50%,-50%) scale(.7); opacity:0; transition: opacity .8s ease, transform .8s ease; }
+.ceremony-stage.active .ceremony-diya.diya-visible { opacity:1; transform: translate(-50%,-50%) scale(1); }
+.diya-body { width:65px; height:32px; border-radius:50% 50% 45% 45%; background: linear-gradient(145deg,#ffcf50,#c26a17); }
+.diya-flame { position:absolute; left:50%; top:-27px; transform: translateX(-50%) scale(0); font-size:27px; transition: transform .5s ease; }
+.diya-flame.flame-burning { transform: translateX(-50%) scale(1); animation: flamePulse .8s ease-in-out infinite alternate; }
+@keyframes flamePulse { from{transform:translateX(-50%) scale(.9);} to{transform:translateX(-50%) scale(1.1);} }
+
+.kumkum { position:absolute; left:27%; top:32%; width:30px; height:30px; border-radius:50%; background: radial-gradient(circle at 35% 30%,#ff5b65,#a60019); opacity:0; transform:scale(.5); transition: opacity .6s ease, transform .6s ease; }
+.kumkum.kumkum-visible { opacity:1; transform:scale(1); }
+.akshathalu { position:absolute; right:23%; bottom:28%; display:flex; gap:3px; opacity:0; transform:scale(.5); transition: opacity .6s ease, transform .6s ease; }
+.akshathalu.akshathalu-visible { opacity:1; transform:scale(1); }
+.akshathalu span { color:#fff6d0; font-size:20px; }
+
+.ceremony-rakhi { position:absolute; left:50%; bottom:18%; width:130px; height:55px; transform: translateX(-50%) scale(0); opacity:0; transition: opacity .8s ease, transform .8s cubic-bezier(.22,1,.36,1); }
+.ceremony-rakhi.rakhi-visible { opacity:1; transform: translateX(-50%) scale(1); }
+.rakhi-thread { position:absolute; left:0; right:0; top:25px; height:8px; border-radius:10px; background: linear-gradient(90deg,#8d1022,#ffd447,#8d1022); }
+.rakhi-center { position:absolute; left:50%; top:50%; width:48px; height:48px; display:flex; align-items:center; justify-content:center; transform: translate(-50%,-50%); border-radius:50%; background: radial-gradient(circle,#ffe47c,#c37918); border: 3px solid #ffd65c; color:#fff8ce; font-size:22px; }
+.ceremony-rakhi.rakhi-tied { position:fixed; z-index:9999; width:150px; height:150px; opacity:1; transform: translate(-50%,-50%) scale(1); pointer-events:none; transition: left 1.8s cubic-bezier(.22,1,.36,1), top 1.8s cubic-bezier(.22,1,.36,1); }
+
+.aarti-glow { position:absolute; left:50%; top:51%; width:260px; height:260px; transform: translate(-50%,-50%) scale(.6); border-radius:50%; background: radial-gradient(circle, rgba(255,200,70,.25), transparent 70%); opacity:0; pointer-events:none; transition: opacity 1s ease, transform 1s ease; }
+.ceremony-stage.active .aarti-glow.glow-active { opacity:1; transform: translate(-50%,-50%) scale(1.15); }
+
+.ceremony-celebration { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+.rakhi-spark { position:absolute; color:#ffd76a; font-size:20px; animation: rakhiSparkAnim 1.4s ease-out forwards; }
+@keyframes rakhiSparkAnim { 0%{opacity:0;transform:scale(0) translateY(20px);} 40%{opacity:1;transform:scale(1.2) translateY(0);} 100%{opacity:0;transform:scale(.4) translateY(-60px);} }
+
+.ceremony-finish { position:absolute; left:50%; top:50%; width:min(90%,520px); transform: translate(-50%,-50%) scale(.85); text-align:center; opacity:0; pointer-events:none; transition: opacity 1s ease, transform 1s ease; }
+.ceremony-finish.finish-visible { opacity:1; transform: translate(-50%,-50%) scale(1); }
+.finish-symbol { font-size:48px; margin-bottom:10px; }
+.ceremony-finish h2 { font-size: clamp(28px,4vw,44px); color:#fff0b0; }
+.ceremony-finish p { font-size: 17px; color: rgba(255,255,255,.9); }
+.finish-sparkles { margin-top: 18px; font-size:22px; letter-spacing:8px; }
+
+
+
+/* =========================================================
+   SHEET 13 — TWO VIDEOS
+   ========================================================= */
+
+.sheet-13 {
+  background: radial-gradient(circle at center, #35102d 0%, #170817 52%, #050106 100%);
+}
+
+.sheet-13 .sheet-content {
+  justify-content: center;
+  align-items: center;
+  padding: 40px 24px;
+}
+
+.video-message-1 {
+  width: min(90vw, 1250px);
+  margin-bottom: 26px;
+  text-align: center;
+  color: #ffd76a;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.45rem, 2.8vw, 2.8rem);
+  font-weight: 600;
+  line-height: 1.35;
+  text-shadow: 0 2px 12px rgba(0,0,0,.65);
+}
+
+.tribute-video-stage {
+  width: min(82vw, 1250px);
+  position: relative;
+}
+
+.tribute-video-card {
+  position: relative;
+  width: 100%;
+  padding: 12px;
+  overflow: hidden;
+  background: linear-gradient(135deg,#fff1a8,#9b650d,#ffd76a,#8b5708,#fff1a8);
+  border-radius: 20px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.55);
+}
+
+.tribute-video-card[hidden] {
+  display: none;
+}
+
+.tribute-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 500px;
+  max-height: 72vh;
+  object-fit: cover;
+  background: #000;
+  border-radius: 10px;
+}
+
+@media (max-width: 700px) {
+  .sheet-13 .sheet-content { padding: 30px 15px; }
+  .video-message-1 { width: 94vw; margin-bottom: 18px; font-size: 1.35rem; }
+  .tribute-video-stage { width: 94vw; }
+  .tribute-video { min-height: auto; max-height: 65vh; }
+}
+
+/* =========================================================
+   SHEET 14 — GROUP PHOTO
+   (CHANGE 9: proper large rectangular photo box, no collapse,
+   heading up top, text below, stray-Rakhi handled in JS)
+   ========================================================= */
+
+.sheet-14 { background: radial-gradient(circle at center, #462d2a 0%, #241310 50%, #080403 100%); }
+.sheet-14 .sheet-content { justify-content: flex-start; padding-top: 6vh; }
+.group-memory-heading { margin-bottom: 8px; }
+.group-memory-heading > span { color: var(--gold); }
+.group-memory-heading p { margin-top:6px; color: rgba(255,215,106,.65); font-size: .75rem; letter-spacing: 4px; }
+.group-memory-heading h1 { margin-top: 6px; color: #fff1d0; font-size: clamp(2.6rem, 6vw, 5rem); }
+.group-photo-frame {
+  position:relative;
+  width: min(880px, 94vw);
+  aspect-ratio: 16 / 10;
+  padding: 12px;
+  margin-top: 28px;
+  background: linear-gradient(135deg,#fff1a8,#9b650d,#ffd76a,#8b5708,#fff1a8);
+  box-shadow: 0 25px 60px rgba(0,0,0,.35);
+}
+.group-photo-frame img { width:100%; height:100%; object-fit: cover; background:#100807; }
+.group-message { max-width: 700px; margin-top: 34px; }
+.group-message h2 { color:#ffe8a5; font-size: clamp(2rem, 4.5vw, 3rem); }
+.group-message p { margin-top: 8px; color: rgba(255,255,255,.72); font-family:"Cormorant Garamond",serif; font-size: clamp(1.15rem, 2.4vw, 1.5rem); }
+.group-signature { display:flex; flex-direction:column; margin-top: 14px; color: rgba(255,255,255,.55); font-size: .85rem; }
+.group-signature strong { color:#ffe8a5; font-family:"Cormorant Garamond",serif; font-size: 1.3rem; }
+
+@media (max-width: 700px) {
+  .group-photo-frame { aspect-ratio: 4 / 3; }
+}
+
+/* =========================================================
+   SHEET 15 — CAMERA
+   (CHANGE 10: bigger step cards/text, message stays w/ photo)
+   ========================================================= */
+
+.sheet-16 { background: radial-gradient(circle at center, #132d38 0%, #08181e 50%, #020607 100%); }
+.camera-heading { max-width: 700px; }
+.camera-icon { display:block; font-size: 2.3rem; margin-bottom: 8px; }
+.camera-heading p:first-of-type { color: rgba(109,230,214,.65); font-size: .75rem; letter-spacing: 4px; }
+.camera-heading h1 { color:#e8fff9; font-size: clamp(2.6rem, 6vw, 4.8rem); }
+.camera-heading p:last-child { margin-top: 8px; color: rgba(255,255,255,.65); font-size: 1rem; }
+
+.camera-steps { width: min(980px, 96vw); display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 22px; margin: 34px 0; }
+.camera-step { padding: 24px 18px; background: rgba(255,255,255,.05); border: 1px solid rgba(109,230,214,.2); border-radius: 18px; }
+.camera-step .step-icon { font-size: 2.1rem; display:block; margin-bottom: 8px; }
+.camera-step h3 { color: #e8fff9; font-size: 1.2rem; margin-bottom: 6px; }
+.camera-step p { color: rgba(255,255,255,.68); font-size: .98rem; line-height: 1.6; }
+
+.camera-container { position:relative; width: min(700px, 94vw); aspect-ratio: 4/3; overflow:hidden; background:#050505; border: 1px solid rgba(109,230,214,.35); border-radius: 22px; }
+.camera-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.camera-canvas { display:none; }
+
+.camera-controls { display:flex; flex-wrap:wrap; justify-content:center; gap: 14px; margin-top: 22px; }
+.camera-btn { padding: 15px 26px; color:#e8fff9; background: rgba(255,255,255,.06); border: 1px solid rgba(109,230,214,.4); border-radius: 34px; font-size: .95rem; font-weight:600; transition: transform .3s ease, box-shadow .3s ease; }
+.camera-btn:hover { transform: translateY(-3px); box-shadow: 0 0 22px rgba(83,220,205,.25); }
+.capture-btn { border-color: rgba(255,215,106,.55); color:#fff1c4; }
+
+.captured-photo-container { display:none; flex-direction:column; align-items:center; margin-top: 26px; }
+.captured-photo-container.show { display:flex; }
+.captured-photo-frame { width: min(400px, 84vw); padding: 10px; background: linear-gradient(135deg,#fff1a8,#9d650c,#ffd76a,#8c5909,#fff1a8); }
+.captured-photo-frame img { width:100%; aspect-ratio: 4/3; object-fit:cover; }
+.captured-photo-container > p { margin: 12px 0; color: rgba(255,255,255,.75); font-family:"Cormorant Garamond",serif; font-size: 1.2rem; }
+
+.camera-expression-box { width: min(460px, 90vw); display:flex; flex-direction:column; gap: 8px; margin: 10px auto 16px; }
+.camera-expression-box label { color: rgba(255,255,255,.75); font-size: .85rem; }
+.camera-expression-box textarea { width:100%; min-height: 80px; padding: 12px 15px; border-radius: 14px; border: 1px solid rgba(255,215,106,.35); background: rgba(255,255,255,.06); color:#fff7dd; outline:none; resize: vertical; font-family: Poppins, sans-serif; }
+
+.share-photo-btn, .continue-final-btn { padding: 15px 28px; color:#fff7dd; background: linear-gradient(135deg, rgba(255,215,106,.22), rgba(255,215,106,.06)); border: 1px solid rgba(255,215,106,.55); border-radius: 34px; font-size: 1rem; font-weight: 600; margin: 6px; transition: transform .3s ease; }
+.share-photo-btn:hover, .continue-final-btn:hover { transform: translateY(-3px); }
+.continue-final-btn { display: none; }
+
+.camera-note { display:flex; align-items:center; gap: 8px; margin-top: 16px; color: rgba(255,255,255,.4); font-size: .75rem; }
+
+/* =========================================================
+   SHEET 16 — FINAL GRAND SURPRISE
+   (CHANGE 11: suspense/gift no longer overlap;
+    CHANGE 12: name heart button + love message moved to bottom)
+   ========================================================= */
+
+.sheet-15 {
+  background: radial-gradient(circle at center, #3e1035 0%, #1a0618 45%, #040102 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding: 40px 20px;
+}
+
+.final-suspense {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  transition: opacity .8s ease, visibility .8s ease;
+}
+.final-suspense.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+.final-suspense p { color: rgba(255,215,106,.8); font-size: clamp(1rem, 2vw, 1.2rem); letter-spacing: 2px; }
+.final-suspense h2 { color:#fff0c2; font-size: clamp(2.6rem, 5.5vw, 4.6rem); }
+
+.final-gift-section {
+  position: relative;
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: opacity .8s ease, visibility .8s ease;
+}
+.final-gift-section.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+.final-gift-text { color:#ffeab0; font-family:"Cormorant Garamond",serif; font-size: 1.6rem; }
+.open-final-gift-btn { margin-top: 22px; padding: 16px 30px; color:#fff7df; background: linear-gradient(135deg, rgba(255,215,106,.25), rgba(255,215,106,.06)); border: 1px solid rgba(255,215,106,.6); border-radius: 44px; font-size: .95rem; }
+
+.final-reveal { position:absolute; inset:0; z-index:40; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding: 60px 22px 100px; text-align:center; overflow-y:auto; opacity:0; visibility:hidden; transition: opacity 1.2s ease, visibility 1.2s ease; }
+.final-reveal.show { opacity:1; visibility:visible; }
+.final-sisters-greeting { display:flex; flex-direction:column; align-items:center; gap: 10px; color:#ffe9a7; font-family:"Cormorant Garamond",serif; }
+.final-sisters-greeting span:nth-child(2) { font-size: clamp(2.2rem, 5.5vw, 4.6rem); letter-spacing: 2px; }
+.final-reveal > h1 { margin-top: 12px; color:#fff5d2; font-size: clamp(3.2rem, 9vw, 7.2rem); line-height: .85; }
+.final-reveal > h1 span { display:block; color:#ffd76a; font-size: .7em; }
+.final-message { max-width: 740px; margin: 20px auto 0; color: rgba(255,255,255,.78); font-family:"Cormorant Garamond",serif; font-size: clamp(1.15rem, 2.4vw, 1.5rem); line-height: 1.85; text-align:center; }
+.final-signature { display:flex; flex-direction:column; align-items:center; margin-top: 22px; color: rgba(255,255,255,.55); font-size: .85rem; }
+.final-signature strong { margin-top:3px; color:#ffe6a0; font-family:"Cormorant Garamond",serif; font-size: 1.5rem; }
+.final-signature p { margin-top: 15px; }
+.final-signature h2 { color:#ffd76a; font-size: clamp(1.8rem, 3vw, 2.3rem); margin: 0; }
+
+.final-name-row { display:flex; align-items:center; justify-content:center; gap: 14px; }
+.final-name-heart-btn {
+  width: 44px; height: 44px; display:flex; align-items:center; justify-content:center;
+  border-radius: 50%; background: radial-gradient(circle, rgba(255,215,106,.28), rgba(255,215,106,.05));
+  border: 1px solid rgba(255,215,106,.55); font-size: 1.2rem;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.final-name-heart-btn:hover { transform: scale(1.08); box-shadow: 0 0 18px rgba(255,215,106,.35); }
+.final-name-heart-msg {
+  display:none; max-width: 560px; margin: 18px auto 0; padding: 18px 22px;
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,215,106,.25); border-radius: 18px;
+  color: rgba(255,240,215,.88); font-family:"Cormorant Garamond",serif; font-size: clamp(1.1rem, 2vw, 1.3rem); line-height: 1.7;
+}
+.final-name-heart-msg.show { display:block; }
+
+.final-twist { margin-top: 34px; display:flex; flex-direction:column; align-items:center; gap: 12px; }
+.final-twist p { color: rgba(255,255,255,.6); font-size: .85rem; }
+.final-heart-btn { width: 70px; height: 70px; display:flex; align-items:center; justify-content:center; border-radius:50%; background: radial-gradient(circle, rgba(255,215,106,.2), rgba(255,215,106,.04)); border: 1px solid rgba(255,215,106,.5); font-size: 2rem; }
+
+.final-love-message { display:none; margin-top: 28px; padding-bottom: 10px; }
+.final-love-message.show { display:block; }
+.final-love-message h2 { color:#fff0b9; font-size: clamp(2rem, 5vw, 3.6rem); }
+.final-love-message p { margin-top: 8px; color: rgba(255,255,255,.6); font-family:"Cormorant Garamond",serif; font-size: 1.2rem; }
+.final-celebration-symbols { margin-top: 16px; font-size: 1.4rem; }
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .sisters-grid { grid-template-columns: 1fr; width: min(380px, 92vw); gap: 40px; }
+  .memory-photo-gallery { grid-template-columns: 1fr; width: min(400px, 92vw); }
+  .history-scene { grid-template-columns: 1fr; text-align: center; }
+  .camera-steps { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .memory-story-item, .memory-story-item.reverse { flex-direction: column; text-align: center; }
+}
+
+@media (max-width: 600px) {
+  .sheet-content { padding: 44px 16px 70px; }
+  .sister-select-item { padding: 22px 14px 28px; }
+  .camera-steps { grid-template-columns: 1fr; }
+  .personal-actions { flex-direction: column; width: 100%; }
+  .sister-next-btn { width: min(300px, 90vw); }
+  .sheet-15 { gap: 20px; padding: 30px 16px; }
+}
+.final-heart-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin-top: 15px;
+}
+
+.final-heart-buttons .final-heart-btn {
+    margin: 0;
+}
+
+/* =========================================================
+   SHEET COUNTER — TOP LEFT
+   ========================================================= */
+
+#sheetCounter {
+  position: fixed;
+  top: 20px;
+  left: 28px;
+  z-index: 99999;
+  color: #8ff0ff;
+  font-family: "Poppins", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 10px rgba(0,0,0,.65);
+  pointer-events: none;
+}
+
+#sheetCounter.sheet-counter-change {
+  animation: sheetCounterChange .35s ease;
+}
+
+@keyframes sheetCounterChange {
+  0% { opacity: 0; transform: translateY(-6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 700px) {
+  #sheetCounter {
+    top: 15px;
+    left: 18px;
+    font-size: .78rem;
+  }
+}
+
+/* =========================================================
+   SHEETS 17–22 — VISUAL SKETCH / DIAGRAM SERIES
+   ========================================================= */
+
+.visual-sheet {
+  background:
+    radial-gradient(circle at center, #24112b 0%, #09050d 72%);
+  overflow: hidden;
+}
+
+.visual-sheet-content {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 30px 30px;
+}
+
+.visual-svg {
+  width: min(90vw, 1200px);
+  height: auto;
+  overflow: visible;
+}
+
+.visual-svg text {
+  fill: #ffd76a;
+  font-family: Georgia, serif;
+  font-size: 42px;
+}
+
+/* ---------- common sketch lines ---------- */
+
+.sketch-person circle,
+.sketch-person path,
+.hand-drawing path,
+.hand-drawing circle {
+  fill: none;
+  stroke: #ffe9a3;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.thread-path {
+  fill: none;
+  stroke: url(#goldThread);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: drawThread17 2.8s ease forwards;
+  filter: url(#softGlow17);
+}
+
+.rakhi-knot {
+  fill: #ffd76a;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: knotAppear17 1s 2.4s ease forwards;
+}
+
+.sparkles-17 text {
+  opacity: 0;
+  animation: sparkle17 1.5s ease forwards;
+}
+
+.sparkles-17 text:nth-child(2) { animation-delay: .4s; }
+.sparkles-17 text:nth-child(3) { animation-delay: .8s; }
+.sparkles-17 text:nth-child(4) { animation-delay: 1.2s; }
+
+@keyframes drawThread17 {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes knotAppear17 {
+  0% { opacity: 0; transform: scale(.2); }
+  70% { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes sparkle17 {
+  0% { opacity: 0; transform: scale(.2); }
+  50% { opacity: 1; transform: scale(1.2); }
+  100% { opacity: .7; transform: scale(1); }
+}
+
+/* ---------- Sheet 18 ---------- */
+
+.bond-node {
+  fill: none;
+  stroke: #ffe9a3;
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.brother-node {
+  animation: centerPulse18 2.5s ease-in-out infinite;
+}
+
+.bond-line {
+  fill: none;
+  stroke: #ffd76a;
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-dasharray: 420;
+  stroke-dashoffset: 420;
+}
+
+.bond-line-1 { animation: drawBond18 1.5s .5s ease forwards; }
+.bond-line-2 { animation: drawBond18 1.5s 1.1s ease forwards; }
+.bond-line-3 { animation: drawBond18 1.5s 1.7s ease forwards; }
+
+.bond-hearts text {
+  opacity: 0;
+  animation: heart18 1s 2.8s ease forwards;
+}
+
+.bond-hearts text:nth-child(2) { animation-delay: 3.1s; }
+.bond-hearts text:nth-child(3) { animation-delay: 3.4s; }
+
+@keyframes drawBond18 {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes heart18 {
+  0% { opacity: 0; transform: scale(.3); }
+  70% { opacity: 1; transform: scale(1.3); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes centerPulse18 {
+  50% { transform: scale(1.04); }
+}
+
+/* ---------- Sheet 19 ---------- */
+
+.tree-trunk,
+.tree-branch {
+  fill: none;
+  stroke: url(#treeGold19);
+  stroke-width: 12;
+  stroke-linecap: round;
+  stroke-dasharray: 700;
+  stroke-dashoffset: 700;
+  animation: growTree19 3s ease forwards;
+}
+
+.tree-branch:nth-of-type(2) { animation-delay: .4s; }
+.tree-branch:nth-of-type(3) { animation-delay: .8s; }
+.tree-branch:nth-of-type(4) { animation-delay: 1.2s; }
+
+.tree-node {
+  fill: none;
+  stroke: #ffe9a3;
+  stroke-width: 7;
+  opacity: 0;
+  animation: treeNode19 .9s ease forwards;
+}
+
+.tree-node-left { animation-delay: 2.1s; }
+.tree-node-right { animation-delay: 2.4s; }
+.tree-node-top { animation-delay: 2.7s; }
+.tree-node-center { animation-delay: 3s; }
+
+.tree-leaves text {
+  opacity: 0;
+  animation: sparkle17 1.2s 3.5s ease forwards;
+}
+
+@keyframes growTree19 {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes treeNode19 {
+  0% { opacity: 0; transform: scale(.5); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ---------- Sheet 20 ---------- */
+
+.cycle-ring {
+  fill: none;
+  stroke: rgba(255,215,106,.25);
+  stroke-width: 6;
+  stroke-dasharray: 20 20;
+  animation: rotateRing20 18s linear infinite;
+  transform-origin: 500px 325px;
+}
+
+.cycle-step {
+  fill: #120b17;
+  stroke: #ffe9a3;
+  stroke-width: 7;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cycleStep20 .9s ease forwards;
+}
+
+.cycle-step-1 { animation-delay: .3s; }
+.cycle-step-2 { animation-delay: .9s; }
+.cycle-step-3 { animation-delay: 1.5s; }
+.cycle-step-4 { animation-delay: 2.1s; }
+
+.cycle-arrow {
+  fill: none;
+  stroke: #ffd76a;
+  stroke-width: 6;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+}
+
+.cycle-arrow-1 { animation: drawCycle20 1s 2.8s ease forwards; }
+.cycle-arrow-2 { animation: drawCycle20 1s 3.4s ease forwards; }
+.cycle-arrow-3 { animation: drawCycle20 1s 4s ease forwards; }
+.cycle-arrow-4 { animation: drawCycle20 1s 4.6s ease forwards; }
+
+.cycle-thread {
+  fill: none;
+  stroke: #ff758c;
+  stroke-width: 8;
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+  animation: drawCycle20 1.5s 5.2s ease forwards;
+}
+
+.cycle-knot {
+  fill: #ffd76a;
+  opacity: 0;
+  animation: cycleKnot20 1s 6.1s ease forwards;
+}
+
+@keyframes rotateRing20 {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes cycleStep20 {
+  0% { opacity: 0; transform: scale(.5); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes drawCycle20 {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes cycleKnot20 {
+  0% { opacity: 0; transform: scale(.2); }
+  70% { opacity: 1; transform: scale(1.25); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ---------- Sheet 21 ---------- */
+
+.hand-drawing path,
+.hand-drawing circle {
+  stroke-dasharray: 1800;
+  stroke-dashoffset: 1800;
+  animation: handDraw21 6s ease forwards;
+}
+
+.hand-drawing path:nth-child(2) { animation-delay: .25s; }
+.hand-drawing path:nth-child(3) { animation-delay: .5s; }
+.hand-drawing circle:nth-child(4) { animation-delay: .75s; }
+.hand-drawing path:nth-child(5) { animation-delay: 1s; }
+.hand-drawing path:nth-child(6) { animation-delay: 1.25s; }
+.hand-drawing circle:nth-child(7) { animation-delay: 1.5s; }
+.hand-drawing path:nth-child(8) { animation-delay: 1.75s; }
+.hand-drawing path:nth-child(9) { animation-delay: 2s; }
+.hand-drawing circle:nth-child(10) { animation-delay: 2.25s; }
+.hand-drawing path:nth-child(11) { animation-delay: 2.5s; }
+
+.sketch-stars text {
+  opacity: 0;
+  animation: sparkle17 1.2s 5s ease forwards;
+}
+
+@keyframes handDraw21 {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ---------- Sheet 22 ---------- */
+
+.big-heart {
+  fill: none;
+  stroke: #ff7895;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 2200;
+  stroke-dashoffset: 2200;
+  animation:
+    drawFinalHeart22 3.5s ease forwards,
+    heartGlow22 2s 3.6s ease-in-out infinite;
+}
+
+.heart-person {
+  fill: #100813;
+  stroke: #ffe9a3;
+  stroke-width: 7;
+  opacity: 0;
+  animation: finalPerson22 1s ease forwards;
+}
+
+.heart-person-1 { animation-delay: 2.7s; }
+.heart-person-2 { animation-delay: 3s; }
+.heart-person-3 { animation-delay: 3.3s; }
+.heart-person-4 { animation-delay: 3.6s; }
+
+.final-sparkles text {
+  opacity: 0;
+  animation: sparkle17 1.2s 4.4s ease forwards;
+}
+
+@keyframes drawFinalHeart22 {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes heartGlow22 {
+  50% { filter: url(#heartGlow22); opacity: .8; }
+}
+
+@keyframes finalPerson22 {
+  0% { opacity: 0; transform: scale(.5); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ---------- mobile ---------- */
+
+@media (max-width: 700px) {
+  .visual-sheet-content {
+    padding: 70px 12px 20px;
+  }
+
+  .visual-svg {
+    width: 96vw;
+  }
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .visual-svg *,
+  .visual-svg {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .thread-path,
+  .bond-line,
+  .tree-trunk,
+  .tree-branch,
+  .cycle-arrow,
+  .cycle-thread,
+  .big-heart,
+  .hand-drawing path,
+  .hand-drawing circle {
+    stroke-dashoffset: 0 !important;
+  }
+
+  .rakhi-knot,
+  .bond-hearts text,
+  .tree-node,
+  .cycle-step,
+  .cycle-knot,
+  .heart-person,
+  .final-sparkles text,
+  .sparkles-17 text {
+    opacity: 1 !important;
+  }
+}
+
+
+/* =========================================================
+   SHEETS 23–26 — FULL SCREEN PHOTOS
+   Each photo fills the complete viewport.
+   ========================================================= */
+
+.photo-sheet {
+  background: #000;
+  overflow: hidden;
+}
+
+.photo-sheet-content {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.photo-sheet-content img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Small cinematic fade when each photo sheet appears */
+.photo-sheet.active .photo-sheet-content img {
+  animation: fullScreenPhotoReveal .9s ease both;
+}
+
+@keyframes fullScreenPhotoReveal {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 700px) {
+  .photo-sheet-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
